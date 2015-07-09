@@ -5,13 +5,23 @@
  */
 package Formularios;
 
+import ConexionDB.Conexion;
+import Controladores.Codigo;
+import Controladores.Comparar;
+import Controladores.limpiar;
+import Datos.DatosCliente;
 import Negocios.ngcRegistrarCliente;
+import Negocios.ngcRegistrarCuenta;
+import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javaapplication1.Cliente;
-import javaapplication1.CuentaAhorros;
-import javaapplication1.CuentaCorriente;
+import Modelos.Cliente;
+import Modelos.Cuenta;
+import Modelos.CuentaAhorros;
+import Modelos.CuentaCorriente;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,11 +30,15 @@ import javax.swing.JOptionPane;
  */
 public class frmRegistrarCliente extends javax.swing.JFrame {
 
+    int modo;
+
     /**
      * Creates new form frmRegistrarCliente
      */
     public frmRegistrarCliente() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.modo = 1;
     }
 
     /**
@@ -36,278 +50,287 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         lblNombre = new javax.swing.JLabel();
-        lblEdad = new javax.swing.JLabel();
-        lblDireccion = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
-        lblCuenta = new javax.swing.JLabel();
-        cmbCuenta = new javax.swing.JComboBox();
         txtNombre = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
+        lblEdad = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
+        lblDireccion = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
-        lblContraseña = new javax.swing.JLabel();
+        cmbCuenta = new javax.swing.JComboBox();
         txtContraseña = new javax.swing.JPasswordField();
-        jPanel3 = new javax.swing.JPanel();
-        btnSalir = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
+        lblFecha = new javax.swing.JLabel();
+        lblCuenta = new javax.swing.JLabel();
+        lblContraseña = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnRegistrar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(214, 203, 186));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-
+        lblNombre.setFont(new java.awt.Font("L M Mono Slant10", 1, 14)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(245, 231, 231));
         lblNombre.setText("Nombre");
-
-        lblEdad.setText("Edad");
-
-        lblDireccion.setText("Direccion");
-
-        lblFecha.setText("Fecha");
-
-        lblCuenta.setText("Cuenta");
-
-        cmbCuenta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Corriente", "Ahorros" }));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        lblNombre.getAccessibleContext().setAccessibleParent(this);
 
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 140, -1));
+        txtNombre.getAccessibleContext().setAccessibleParent(this);
 
         txtEdad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtEdad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtEdad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEdadActionPerformed(evt);
             }
         });
+        getContentPane().add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 140, -1));
+        txtEdad.getAccessibleContext().setAccessibleParent(this);
+
+        lblEdad.setFont(new java.awt.Font("L M Mono Slant10", 1, 14)); // NOI18N
+        lblEdad.setForeground(new java.awt.Color(245, 231, 231));
+        lblEdad.setText("Edad");
+        getContentPane().add(lblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 60, -1));
+        lblEdad.getAccessibleContext().setAccessibleParent(this);
 
         txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDireccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 120, 140, -1));
+        txtDireccion.getAccessibleContext().setAccessibleParent(this);
+
+        lblDireccion.setFont(new java.awt.Font("L M Mono Slant10", 1, 14)); // NOI18N
+        lblDireccion.setForeground(new java.awt.Color(245, 231, 231));
+        lblDireccion.setText("Direccion");
+        getContentPane().add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
+        lblDireccion.getAccessibleContext().setAccessibleParent(this);
 
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 160, 140, -1));
+        txtFecha.getAccessibleContext().setAccessibleParent(this);
 
+        cmbCuenta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Corriente", "Ahorros" }));
+        cmbCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(cmbCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 200, 140, -1));
+        cmbCuenta.getAccessibleContext().setAccessibleParent(this);
+
+        txtContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 150, -1));
+        txtContraseña.getAccessibleContext().setAccessibleParent(this);
+
+        lblFecha.setFont(new java.awt.Font("L M Mono Slant10", 1, 14)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(245, 231, 231));
+        lblFecha.setText("Fecha");
+        getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+        lblFecha.getAccessibleContext().setAccessibleParent(this);
+
+        lblCuenta.setFont(new java.awt.Font("L M Mono Slant10", 1, 14)); // NOI18N
+        lblCuenta.setForeground(new java.awt.Color(245, 231, 231));
+        lblCuenta.setText("Cuenta");
+        getContentPane().add(lblCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 60, -1));
+        lblCuenta.getAccessibleContext().setAccessibleParent(this);
+
+        lblContraseña.setFont(new java.awt.Font("L M Mono Slant10", 1, 14)); // NOI18N
+        lblContraseña.setForeground(new java.awt.Color(245, 231, 231));
         lblContraseña.setText("Contraseña");
+        getContentPane().add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+        lblContraseña.getAccessibleContext().setAccessibleParent(this);
 
-        txtContraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel1.setFont(new java.awt.Font("IncisedBlackWide", 2, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(224, 224, 224));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Registro de Clientes");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 220, -1));
+        jLabel1.getAccessibleContext().setAccessibleParent(this);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFecha)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lblEdad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(lblDireccion)
-                            .addComponent(lblCuenta)
-                            .addComponent(lblContraseña))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cmbCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, 125, Short.MAX_VALUE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEdad)
-                    .addComponent(txtEdad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDireccion)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFecha)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCuenta)
-                    .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblContraseña)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btnSalir.setText("Salir");
-
+        btnRegistrar.setForeground(new java.awt.Color(88, 41, 41));
         btnRegistrar.setText("Registrar");
+        btnRegistrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 70, 30));
+        btnRegistrar.getAccessibleContext().setAccessibleParent(this);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnRegistrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnSalir.setForeground(new java.awt.Color(88, 41, 41));
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 60, 30));
+        btnSalir.getAccessibleContext().setAccessibleParent(this);
 
-        jLabel1.setFont(new java.awt.Font("Droid Sans", 1, 12)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Registro de Clientes");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setForeground(new java.awt.Color(88, 41, 41));
+        jButton1.setText("Regresar");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 70, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jButton2.setForeground(new java.awt.Color(88, 41, 41));
+        jButton2.setText("Limpiar");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 60, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel3.setFont(new java.awt.Font("L M Mono Slant10", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(245, 231, 231));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Metodo5.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        
+        String Direccion = txtDireccion.getText();
+        int Edad = 0;
+        try{
+        Edad = Integer.parseInt(txtEdad.getText());
+       
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(rootPane,"Formato en edad incorrecto");
+                   
+        }
+        if(Edad<=0){
+                        JOptionPane.showMessageDialog(rootPane,"La edad no puede ser negativa");
+                                
+        }
+        else{
+        String Nombre = txtNombre.getText();
+        String Fecha = txtFecha.getText();
+
+        Object e = cmbCuenta.getSelectedItem();
+        char[] charC = txtContraseña.getPassword();
+        String contra = new String(charC);
+        String cuenta = String.valueOf(e);
+
+        if (modo == 2) {
+            Connection conexion = null;
+            conexion = Conexion.conexion();
+            String codN = Codigo.CodNombre(txtNombre.getText(), conexion);
+            String codC = Codigo.CodCuenta(txtNombre.getText(), conexion);
+
+            Cliente cliente = new Cliente(Nombre, Edad, Fecha, Direccion, codN);
+            Cuenta cta;
+
+            if (cuenta.equals("Corriente")) {
+
+                cta = new CuentaCorriente(codC, codN, contra, 0, cuenta);
+
+            } else {
+
+                cta = new CuentaAhorros(codC, codN, contra, 0, cuenta);
+
+            }
+
+            try {
+                if (ngcRegistrarCliente.RegistrarC(cliente) && ngcRegistrarCuenta.RegistrarC(cta)) {
+                    JOptionPane.showMessageDialog(rootPane, "Cliente registrado exitosamente");
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(frmRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+
+            String codNF=" ";
+            try {
+                codNF = Codigo.CodigoNombreF(Nombre);
+            } catch (IOException ex) {
+                Logger.getLogger(frmRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(frmRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            Cliente cliente = new Cliente(Nombre, Edad, Direccion, Fecha, codNF);
+            String codCF=" ";
+            try {
+                codCF = Codigo.CodigoCuentaF(Nombre);
+            } catch (IOException ex) {
+                Logger.getLogger(frmRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(frmRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Cliente antes registro"+cliente.getFecha() + cliente.getNombre());
+            Cuenta cta;
+
+            if (cuenta.equals("Corriente")) {
+
+                cta = new CuentaCorriente(codCF, codNF, contra, 0, cuenta);
+
+            } else {
+
+                cta = new CuentaAhorros(codCF, codNF, contra, 0, cuenta);
+            }
+            try {
+                if ( ngcRegistrarCliente.RegistrarCF(cliente)) {
+                    if(ngcRegistrarCuenta.RegistrarCF(cta)){
+                    JOptionPane.showMessageDialog(rootPane,"CLiente registrado con exito!");
+                    
+                    }
+                    
+                }
+                else{
+                   JOptionPane.showMessageDialog(rootPane,"Hay un error registrando al cliente");
+
+                }
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+
+            }
+
+        }
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEdadActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        Cliente cliente=new Cliente();
-        cliente.setDireccion(txtDireccion.getText());
-        cliente.setEdad(Integer.parseInt(txtEdad.getText()));
-        cliente.setFecha(txtFecha.getText());
-        cliente.setNombre(txtNombre.getText());
-        try {
-            if(ngcRegistrarCliente.RegistrarC(cliente)){
-                JOptionPane.showMessageDialog(rootPane, "Cliente registrado exitosamente");
-                
-            };
-        } catch (SQLException ex) {
-            Logger.getLogger(frmRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       Object e=cmbCuenta.getSelectedItem();
-       if(String.valueOf(e).equals("Corriente")){
-           CuentaCorriente cta=new CuentaCorriente();
-           cta.setContraseña(txtContraseña.getText());
-           cta.setSaldo(0);
-       }
-       else{
-           CuentaAhorros cta=new CuentaAhorros();
-             cta.setContraseña(txtContraseña.getText());
-           cta.setSaldo(0);
-           
-       }
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+
+       System.exit(0);
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        Principal principal=new Principal();
+        principal.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmRegistrarCliente().show();
-                
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cmbCuenta;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblCuenta;
     private javax.swing.JLabel lblDireccion;

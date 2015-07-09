@@ -5,6 +5,14 @@
  */
 package Formularios;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Modelos.vectorGenericosCuentas;
+import Modelos.vectorPersonas;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kevin
@@ -15,7 +23,10 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Princiapl
      */
     public Principal() {
+        
         initComponents();
+         this.setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -27,38 +38,42 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        desktopPane = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
-        jMenu12 = new javax.swing.JMenu();
-        jMenu11 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
-
-        jMenu3.setText("jMenu3");
-
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fisi.png"))); // NOI18N
+
+        jMenuBar1.setBackground(new java.awt.Color(233, 155, 78));
+
         jMenu1.setText("Archivo");
-        jMenu1.add(jMenu10);
+        jMenu1.setEnabled(false);
 
-        jMenu12.setText("Cambiar Usuario");
-        jMenu1.add(jMenu12);
+        jMenuItem6.setText("CambiarUsuario");
+        jMenu1.add(jMenuItem6);
 
-        jMenu11.setText("Salir");
-        jMenu1.add(jMenu11);
+        jMenuItem4.setText("Salir");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
 
@@ -72,7 +87,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem3.setText("Consultar");
+        jMenuItem3.setText("Consultar/Editar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -80,30 +95,62 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setText("Modificar");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem7.setText("CrearArchivo");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem8.setText("VaciarArchivo");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Cuentas");
 
-        jMenu7.setText("REgistrar");
-        jMenu4.add(jMenu7);
+        jMenuItem1.setText("Administrar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
 
-        jMenu9.setText("Modificar");
-        jMenu4.add(jMenu9);
+        jMenuItem5.setText("CrearArchivo");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
 
-        jMenu8.setText("Consultar");
-        jMenu4.add(jMenu8);
+        jMenuItem9.setText("VaciarArchivo");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem9);
 
         jMenuBar1.add(jMenu4);
 
-        jMenu13.setText("Acerca de");
+        jMenu13.setText("Creditos");
+
+        jMenuItem10.setText("Integrantes");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu13.add(jMenuItem10);
+
         jMenuBar1.add(jMenu13);
 
         setJMenuBar(jMenuBar1);
@@ -112,14 +159,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1)
         );
 
         pack();
@@ -127,82 +171,117 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // Registrar
-        frmRegistrarCliente clientes=new frmRegistrarCliente();//creo un objeto frmRegistrarCliente
-        this.desktopPane.add(clientes);//agrego objeto al panel
+        frmRegistrarCliente clientes = new frmRegistrarCliente();//creo un objeto frmRegistrarCliente
+        dispose();
         clientes.show();//muestro objeto
-        
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         //Consultar
-        frmConsultarClientes consultar=new frmConsultarClientes();//Creo un objeto frmConsular
-        this.desktopPane.add(consultar);//agrego objeto consultar al panel
+        frmConsultarClientes consultar = new frmConsultarClientes();//Creo un objeto frmConsular
+        dispose();
         consultar.show();//muestro objeto instanciado
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        frmAdministrarCuenta Ccuenta = new frmAdministrarCuenta();
+        dispose();
+        Ccuenta.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-   //Modificar
-        frmModificarCliente modificar=new frmModificarCliente();//Creo un objeto frmCliente
-    this.desktopPane.add(modificar);//Agrego objeto al panel
-    modificar.show();//muestro objeto instanciado
-         
+        System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        File fil = new File("Cuentas.obj");
+        if (!fil.exists()) {
+            vectorPersonas per = new vectorPersonas();
+          per.crearArchivoC();
+            
+                JOptionPane.showMessageDialog(rootPane, "Archivo de Cuentas creado con exito!");
+           
+
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+
+        File fil = new File("Clientes.obj");
+        if (!fil.exists()) {
+            vectorPersonas per = new vectorPersonas();
+            per.crearArchivoC();
+                JOptionPane.showMessageDialog(rootPane, "Archivo de Clientes creado con exito!");
+            
+
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        File fil = new File("Cuentas.obj");
+        if (fil.exists()) {
+            vectorGenericosCuentas per=new vectorGenericosCuentas();
+            
+           per.crearArchivoC();
+                JOptionPane.showMessageDialog(rootPane, "Archivo de Cuentas vacio!");
+           
+        }
+            else{
+                    JOptionPane.showMessageDialog(rootPane,"Error,debe crear primero un archivo antes de vaciarlo!");
+                    }
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    File fil = new File("Clientes.obj");
+        if (fil.exists()) {
+            vectorPersonas per = new vectorPersonas();
+            per.crearArchivoC();
+                           JOptionPane.showMessageDialog(rootPane, "Archivo de clientes vacio!");
+
+            
+           }
+            else{
+                    JOptionPane.showMessageDialog(rootPane,"Error,debe crear primero un archivo antes de vaciarlo!");
+                    }
+            // TODO add your handling code here:
+      
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        dispose();
+        frmCreditos creditos=new frmCreditos();
+        creditos.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().show();
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

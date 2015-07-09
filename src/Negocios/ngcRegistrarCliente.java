@@ -7,9 +7,12 @@ package Negocios;
 
 import ConexionDB.Conexion;
 import Datos.DatosCliente;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javaapplication1.Cliente;
+import Modelos.Cliente;
+import Modelos.generico;
+import Modelos.genericoP;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,6 +39,17 @@ public class ngcRegistrarCliente {
         }
         
         
+       
+    }
+    public static boolean RegistrarCF(Cliente cliente) throws IOException{
+         boolean estado=false;
+        
+           
+        estado= DatosCliente.registrarF(cliente);  
+      
+        
+        
+             return estado;
        
     }
     

@@ -5,6 +5,20 @@
  */
 package Formularios;
 
+import Controladores.limpiar;
+import Datos.DatosCliente;
+import Datos.DatosEmpleados;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Modelos.Cliente;
+import Modelos.vectorPersonas;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author kevin
@@ -16,6 +30,7 @@ public class frmConsultarClientes extends javax.swing.JFrame {
      */
     public frmConsultarClientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,57 +42,257 @@ public class frmConsultarClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        btnCodigo = new javax.swing.JButton();
+        txtCodigo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnAll = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("EB Garamond 08", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(253, 235, 235));
+        jLabel1.setText("Consulta de Clientes");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 200, 23));
+
+        btnCodigo.setText("BuscarxCodigo");
+        btnCodigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btnCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodigoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 84, 204, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Edad", "Direccion", "Fecha"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 410, 100));
+
+        btnAll.setText("Buscar Todos");
+        btnAll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAllActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
+
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 60, 30));
+
+        btnEditar.setText("Editar");
+        btnEditar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 70, 30));
+
+        btnRegresar.setText("Regresar");
+        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, 30));
+
+        jButton1.setText("Limpiar");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 60, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/BBBBBBBB.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodigoActionPerformed
+
+ 
+        limpiar.limpiarTabla(jTable1);
+        ArrayList<Cliente> cliente;
+        boolean encontrado=false;
+        try {
+            cliente = DatosCliente.getAllF();
+            if (cliente == null) {
+
+                JOptionPane.showMessageDialog(rootPane, "No hay cliente");
+            } 
+            
+            else {
+                int i=0;
+                //12134124
+                DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+                for (Cliente ck : cliente) {
+                    try{
+                    if(ck.getId().equals(txtCodigo.getText())){
+                        System.out.println("NOmbre REcuperado::"+ck.getNombre());
+                    Object[] DatosFila = {
+                        ck.getId(),
+                        ck.getNombre(),
+                        ck.getEdad(),
+                        ck.getDireccion(),
+                        ck.getFecha(),};
+                    modeloTabla.addRow(DatosFila);
+                    jTable1.changeSelection(i, 0, false, false);
+                    encontrado=true;
+                    }
+                    }catch(ArrayIndexOutOfBoundsException e){
+                        System.out.println("Indice invalido");
+                    }
+                    i++;
+                }
+               if(!encontrado){
+                    
+                    JOptionPane.showMessageDialog(rootPane,"No se ha encontrado al cliente");
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(frmConsultarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmConsultarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+// TODO add your handling code here:
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnCodigoActionPerformed
+
+    private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllActionPerformed
+try {
+            // TODO add your handling code here:
+
+            limpiar.limpiarTabla(jTable1);
+            ArrayList<Cliente> cliente = DatosCliente.getAllF();
+            if (cliente == null || cliente.size()==0) {
+
+                JOptionPane.showMessageDialog(rootPane, "No hay clientes");
+            } else {
+                DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+                for (Cliente ck : cliente) {
+                    Object[] DatosFila = {
+                        ck.getId(),
+                        ck.getNombre(),
+                        ck.getEdad(),
+                        ck.getDireccion(),
+                        ck.getFecha(),};
+                    modeloTabla.addRow(DatosFila);
+
+                }
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(frmConsultarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmConsultarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAllActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+int indice = jTable1.getSelectedRow();
+        try {
+            ArrayList<Cliente> cliente = DatosCliente.getAllF();
+            for (int i = 0; i < cliente.size(); i++) {
+
+                if (cliente.get(i).getId().equals(jTable1.getValueAt(indice, 0))) {
+
+                    cliente.get(i).setNombre((String) jTable1.getValueAt(indice, 1));
+                    cliente.get(i).setEdad((int)jTable1.getValueAt(indice, 2));
+                    cliente.get(i).setDireccion((String) jTable1.getValueAt(indice, 3));
+                    cliente.get(i).setFecha((String) jTable1.getValueAt(indice, 4));
+                }
+
+            }
+            vectorPersonas x=new vectorPersonas();
+            x.crearArchivoC();
+            for(int i=0;i<cliente.size();i++){
+                x.añadir("Clientes.obj",cliente.get(i));
+            }
+            JOptionPane.showMessageDialog(rootPane,"Campo editado con exito");
+
+        } catch (IOException ex) {
+            Logger.getLogger(frmConsultarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmConsultarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+dispose();
+Principal prin=new Principal();
+prin.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmConsultarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmConsultarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmConsultarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmConsultarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmConsultarClientes().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAll;
+    private javax.swing.JButton btnCodigo;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 }

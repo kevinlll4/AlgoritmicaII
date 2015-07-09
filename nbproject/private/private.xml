@@ -3,16 +3,43 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/javaapplication1/ArrayCliente.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/javaapplication1/CuentaAhorros.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/Formularios/frmRegistrarCliente.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/Datos/DatosCuenta.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/Datos/DatosCliente.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/javaapplication1/Cuenta.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/javaapplication1/CuentaCorriente.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/Negocios/ngcRegistrarCliente.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/Negocios/ngcRegistrarCuenta.java</file>
-            <file>file:/home/kevin/NetBeansProjects/JavaApplication1/src/javaapplication1/MenuPrincipal.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/vectorGenericosCuentas.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/frmConsultarClientes.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/MyObjectOutput.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Negocios/ngcLogin.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Datos/DatosCuenta.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Datos/DatosEmpleados.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/nbproject/build-impl.xml</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Datos/DatosCliente.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Controladores/Comparar.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/frmAdministrarCuenta.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/Persona.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Negocios/ngcRegistrarCuenta.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/manifest.mf</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/frmConsultarCuenta.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Controladores/MetodosBase.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/ScreenSplash.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/Usuarios.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/JavaApplication1.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/vectorPersonas.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Controladores/Codigo.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/Cliente.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/Comun.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/generico.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/Principal.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/readme</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/segundo.txt</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Controladores/limpiar.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/newjavascript.js</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/genericoP.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Negocios/ngcRegistrarCliente.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/frmRegistrarCliente.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/ConexionDB/Conexion.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/frmLogin.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/CuentaAhorros.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/Cuenta.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Modelos/CuentaCorriente.java</file>
+            <file>file:/media/kevin/KINGSTON1/hacer/NetBeansProjects/JavaApplication1/src/Formularios/frmCreditos.java</file>
         </group>
     </open-files>
 </project-private>
